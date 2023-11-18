@@ -202,6 +202,30 @@ export const user_login = (data, callback) => {
     };
   };
 
+  export const lessonCreate = (data, callback) => {
+    return function () {
+      var headers = {
+        "Content-Type ": "application/json",
+      };
+      axios
+        .post(`${GLOBAL_CONSTANTS.backend_url}lesson/create`, data, {
+          headers,
+        })
+        .then((resp) => {
+          callback(resp?.data);
+        })
+        .catch((error) => {
+
+          toast.error(
+            error ?? "Something went wrong",
+            {
+              autoClose: 2000,
+            }
+          );
+        });
+    };
+  };
+
   const getUserList = (data) => ({
     type: types.USERS_LIST,
     payload: data,
