@@ -181,7 +181,7 @@ export const user_login = (data, callback) => {
   export const quizCreate = (data, callback) => {
     return function () {
       var headers = {
-        "Content-Type ": "multipart/form-data",
+        "Content-Type ": "application/json",
       };
       axios
         .post(`${GLOBAL_CONSTANTS.backend_url}quiz/upsert_quiz`, data, {
