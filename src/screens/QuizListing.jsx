@@ -29,9 +29,41 @@ export default function QuizListing() {
   const { quizList } = useSelector((state) => state.data);
 
   const [profileImage, setProfileImage] = useState([]);
-  const handleFileSelect = (event) => {
-    setProfileImage(() => event.target.files);
+  // const handleFileSelect = (event) => {
+  //   setProfileImage(() => event.target.files);
+  // };
+
+  const handleFileSelect = (e) => {
+    const file = e.currentTarget.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      let base64Data = event.target.result.split(",")[1]; // Get the base64 data part
+
+      const mimeRegex = /^data:.+;base64,/;
+      if (mimeRegex.test(base64Data)) {
+        base64Data = base64Data.replace(mimeRegex, '');
+      }
+      // Ensure the base64 data length is a multiple of 4
+      while (base64Data.length % 4 !== 0) {
+        base64Data += '=';
+      }
+
+      // console.log("base64Data", base64Data)
+      const payload = {
+        // mode: "teacher",
+        base64: base64Data
+      }
+      // dispatch(uploadUser(payload))
+      // setFileData(base64Data); // Store the base64 data in state
+    };
+
+    reader.readAsDataURL(file);
+
+    // console.log("base64", fileData, file)
   };
+
+
 
   const onSignUp = () => {
     console.info(profileImage, "profileImage");
@@ -244,7 +276,11 @@ export default function QuizListing() {
                       id="file"
                       name="file"
                       className="sr-only"
-                      onChange={handleFileSelect}
+                      onChange={(e) => handleFileSelect(e)}
+                      onClick={(e) => {
+                        e.target.value = null;
+                      }}
+                      // onChange={handleFileSelect}
                     />
                   </div>
                 </div>

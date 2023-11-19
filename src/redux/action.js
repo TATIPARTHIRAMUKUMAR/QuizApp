@@ -207,11 +207,14 @@ export const user_login = (data, callback) => {
       var headers = {
         "Content-Type ": "application/json",
       };
+      const note = toast.loading("Creating Lesson ..")
+
       axios
         .post(`${GLOBAL_CONSTANTS.backend_url}lesson/create`, data, {
           headers,
         })
         .then((resp) => {
+          toast.update(note,{render:"Lesson Created",type:"success",isLoading:false,autoClose:2000,});
           callback(resp?.data);
         })
         .catch((error) => {

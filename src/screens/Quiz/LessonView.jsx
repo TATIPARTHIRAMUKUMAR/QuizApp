@@ -56,7 +56,7 @@ export default function LessonView() {
         </Box>
         <TabPanel value="1" className="h-full w-full p-0 pb-4 overflow-y-scroll" >
         <div className="grid" >
-        <iframe srcDoc={ lessonView?.lesson }
+        <iframe srcDoc={ lessonView?.data }
             id="myFrame"
             width="100%" 
             height={frameHeight}

@@ -38,6 +38,7 @@ export default function CreateLesson() {
             lessonCreate(
                 payload,
                 () => {
+                    window.location.reload();
                     console.log('testing')
                 }
             )
