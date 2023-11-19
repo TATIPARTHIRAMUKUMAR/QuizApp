@@ -183,11 +183,14 @@ export const user_login = (data, callback) => {
       var headers = {
         "Content-Type ": "application/json",
       };
+      const note = toast.loading("Creating Lesson ..")
       axios
         .post(`${GLOBAL_CONSTANTS.backend_url}quiz/upsert_quiz`, data, {
           headers,
         })
         .then((resp) => {
+          console.log("resp",resp)
+          toast.update(note,{render:resp?.data?.message,type:"success",isLoading:false,autoClose:2000});
           callback(resp?.data);
         })
         .catch((error) => {
