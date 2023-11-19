@@ -52,7 +52,10 @@ export default function QuizListing() {
       // console.log("base64Data", base64Data)
       const payload = {
         // mode: "teacher",
-        file: base64Data
+        user_id: String(GLOBAL_CONSTANTS?.user_cred?.user_id),
+        base64: base64Data,
+        // base64: "data:application/gzip;base64,"+base64Data
+
       }
       dispatch(quizCreate(payload))
       setOpen(false);
